@@ -13,6 +13,7 @@ export class AppComponent {
   @ViewChild('icCropper') icCropper?: CropperComponent;
 
   rounded = false;
+  rules = false;
 
   title = 'ic-test';
 

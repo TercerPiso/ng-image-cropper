@@ -1,5 +1,30 @@
 .container {
   position: relative;
+  &.rules {
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #00a3c047;
+      position: absolute;
+      z-index: 1;
+      left: 0px;
+      top: calc(50% - 1px);
+      pointer-events: none;
+    }
+    &::before {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 100%;
+      background: #00a3c047;
+      position: absolute;
+      z-index: 1;
+      left: calc(50% - 1px);
+      pointer-events: none;
+    }
+  }
   .zoomController {
     position: absolute;
     bottom: 5px;

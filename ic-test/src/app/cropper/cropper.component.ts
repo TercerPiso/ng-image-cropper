@@ -14,6 +14,7 @@ export class CropperComponent implements OnInit, AfterViewInit {
   @Input() cropWidth: number = 100;
   @Input() cropHeight: number = 100;
   @Input() rounded = false;
+  @Input() rules = false;
 
   @ViewChild('cropperCanvas') cropperCanvas!: {nativeElement: HTMLCanvasElement};
   @ViewChild('croppedCanvas') croppedCanvas!: {nativeElement: HTMLCanvasElement};
