@@ -55,33 +55,40 @@ export class CropperComponent implements OnInit, AfterViewInit {
     };
   }
 
+  ngOnInit(): void { }
+
   ngAfterViewInit(): void {
-    this.workArea.nativeElement.addEventListener('mousedown', (d) => {
-      this.clickPressed =true;
-      this.icPoint = new Point(d.pageX, d.pageY);
-      this.imagePosition = Object.assign({}, this.currentImagePosition);
-    });
-    this.workArea.nativeElement.addEventListener('mouseup', (d) => {
-      this.clickPressed = false;
-    });
-    this.workArea.nativeElement.addEventListener('mouseout', (d) => {
-      this.clickPressed = false;
-    });
-    this.workArea.nativeElement.addEventListener('mousemove', (d) => {
-      if(this.clickPressed) {
-        const deltaMousePosition = new Point(
-          d.pageX - this.icPoint.x,
-          d.pageY - this.icPoint.y
-        );
-        this.currentImagePosition.x = this.imagePosition.x + deltaMousePosition.x;
-        this.currentImagePosition.y = this.imagePosition.y + deltaMousePosition.y;
-        this.drawImage();
-      }
-    });
+    this.workArea.nativeElement.addEventListener('mousedown', (d) => this.startMovement(d.pageX, d.pageY));
+    this.workArea.nativeElement.addEventListener('mouseup', (d) => this.stopMovement());
+    this.workArea.nativeElement.addEventListener('mouseout', (d) => this.stopMovement());
+    this.workArea.nativeElement.addEventListener('mousemove', (d) => this.mouseMoving(d.pageX, d.pageY));
+    // touch events
+    this.workArea.nativeElement.addEventListener('touchstart', (d) => this.startMovement(d.touches[0].clientX, d.touches[0].clientY));
+    this.workArea.nativeElement.addEventListener('touchend', (d) => this.stopMovement());
+    this.workArea.nativeElement.addEventListener('touchcancel', (d) => this.stopMovement());
+    this.workArea.nativeElement.addEventListener('touchmove', (d) => this.mouseMoving(d.touches[0].clientX, d.touches[0].clientY));
   }
 
-  ngOnInit(): void {
+  startMovement(x: number, y: number) {
+    this.clickPressed =true;
+    this.icPoint = new Point(x, y);
+    this.imagePosition = Object.assign({}, this.currentImagePosition);
+  }
 
+  stopMovement() {
+    this.clickPressed = false;
+  }
+
+  mouseMoving(x: number, y: number) {
+    if(this.clickPressed) {
+      const deltaMousePosition = new Point(
+        x - this.icPoint.x,
+        y - this.icPoint.y
+      );
+      this.currentImagePosition.x = this.imagePosition.x + deltaMousePosition.x;
+      this.currentImagePosition.y = this.imagePosition.y + deltaMousePosition.y;
+      this.drawImage();
+    }
   }
 
   loadImage(data: string) {

@@ -2,7 +2,7 @@
   <button (click)="uploadImage()">Upload</button>
   <input type="file" #filUp style="display: none" (change)="onUpload($event)" accept="image/*"/>
 </div>
-<ic-cropper #icCropper [width]="500" [rounded]="rounded" [height]="500" [cropWidth]="250" [cropHeight]="250" initialImage="https://i.imgur.com/t64XaJN_d.webp"></ic-cropper>
+<ic-cropper #icCropper [width]="500" [rounded]="rounded" [height]="500" [cropWidth]="350" [cropHeight]="350" initialImage="https://i.imgur.com/piHhXvR_d.webp?maxwidth=760&fidelity=grand"></ic-cropper>
 <button (click)="save()">Guardar</button>
 <input type="checkbox" [(ngModel)]="rounded" />
 
