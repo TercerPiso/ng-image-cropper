@@ -1,0 +1,13 @@
+<div class="container" [style.width]="width + 'px'" [style.height]="height + 'px'" #workArea>
+  <div class="cropper-area" [style.width]="width + 'px'" [style.height]="height + 'px'">
+    <img *ngIf="initialImage && !context" [src]="initialImage" />
+    <canvas [width]="width" [height]="height" #cropperCanvas></canvas>
+    <div class="shadow" *ngIf="context"></div>
+    <div class="centeredCanvas">
+      <canvas [class.rounded]="rounded" [width]="cropWidth" [height]="cropHeight" #croppedCanvas></canvas>
+    </div>
+  </div>
+  <div class="zoomController" *ngIf="context">
+    <input type="range" [style.width]="(width/2) + 'px'" max="100" [(ngModel)]="zoom" (input)="drawImage()">
+  </div>
+</div>
